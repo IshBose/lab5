@@ -1,5 +1,8 @@
 'use strict';
 
+const e = require("express");
+const { text } = require("express");
+
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
@@ -10,7 +13,12 @@ $(document).ready(function() {
  */
 function initializePage() {
 	console.log("Javascript connected!");
+	e.preventDefault();
+	$("a.clicker").click(nameClicker);
+
 }
+
+
 
 function anagrammedName(name) {
 	// Thanks, Internet Anagram Server!
@@ -43,4 +51,12 @@ function anagrammedName(name) {
 		console.log(name + " not known for anagramming.");
 		return name;
 	}
+}
+
+function nameClicker(e){
+	e.preventDefault();
+	var name = $("a").text();
+	var newName = anagrammedName(name);
+	$("a.clicker").text(newName);
+	
 }
